@@ -1,0 +1,6 @@
+﻿C:\Programms_\Visual Studio 2k22\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Exeption.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  Exception.cpp
+C:\Users\alexz\C++ prog\Exeption\Exeption\Header.h(18,31): warning C4290: спецификация исключений C++ игнорируется, кроме случая, когда указывается, что функция не является __declspec(nothrow)
+C:\Users\alexz\C++ prog\Exeption\Exeption\Exception.cpp(42,12): warning C4101: err: неиспользованная локальная переменная
+C:\Users\alexz\C++ prog\Exeption\Exeption\Exception.cpp(126,2): warning C4286: Child &: перехвачено базовым классом ("Parent &") в строке 123
+  Exeption.vcxproj -> C:\Users\alexz\C++ prog\Exeption\x64\Debug\Exception.exe
