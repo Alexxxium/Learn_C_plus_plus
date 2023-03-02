@@ -12,7 +12,7 @@ void sas1() {
 
 
 
-	try									// блок try
+	try							// блок try
 	{
 		std::cout << "Block try!\n";
 
@@ -21,11 +21,11 @@ void sas1() {
 
 
 
-	try									// следующая связь блоков try catch
+	try							// следующая связь блоков try catch
 	{
 		const char* cstr("sas");
 		std::string str("sys");
-									// выбрасываем исключения определенного типа:
+								// выбрасываем исключения определенного типа:
 		throw - 1;					// типа int	(в данном случае обработка исключения сразу уйдет в блок cath, пропустив следующие строки блока try)
 		throw 'a';					// char
 		throw str;					// std::string
@@ -39,16 +39,16 @@ void sas1() {
 
 	}
 
-	catch(int err) {									// параметр обработки int
+	catch(int err) {					// параметр обработки int
 		std::cout << "Exeption type is int\n";
 	}
-	catch (char) {										// char, переменная по значению не указана
+	catch (char) {						// char, переменная по значению не указана
 		std::cout << "Exaption type is char\n";
 	}
-	catch (std::string &str) {							// передаем по ссылке
+	catch (std::string &str) {				// передаем по ссылке
 		std::cout << "Exaption: " << str << '\n';
 	}
-	catch (...) {										// элипсис для обработки пропущенных исключений (эдепсис принимает любые параметры)
+	catch (...) {						// элипсис для обработки пропущенных исключений (эдепсис принимает любые параметры)
 		std::cout << "Lost exeption: std:string\n";
 	}
 }
@@ -67,23 +67,23 @@ void sas2() {
 
 	// Разкручивание стека
 	
-	std::cout << "Start main\n";	// сообщение (1)
+	std::cout << "Start main\n";				// сообщение (1)
 	try
 	{
-		one();	// заходим в функцию one() см. Funck.cpp
+		one();						// заходим в функцию one() см. Funck.cpp
 	}
-	catch (int)	// исключение уже обработано!
+	catch (int)						// исключение уже обработано!
 	{
 		std::cerr << "main caught int exception\n";
 	}
-	std::cout << "End main\n";	// сообщение (9)
+	std::cout << "End main\n";				// сообщение (9)
 
 	// Спецификация исключений
 
 	try
 	{
 		doSomething1();
-		doSomething2();		// при исключении мы покидаем блок try!
+		doSomething2();					// при исключении мы покидаем блок try!
 		doSomething3();
 	}
 	catch (double) { std::cerr << "\nExeption!\n"; }
@@ -106,7 +106,7 @@ void sas3() {
 	Array<int, 3> arr1{ 1, 3, 5};
 	try		// намеренно создаем исключения
 	{
-		arr1[12] = 0;											// неправильный индекс
+		arr1[12] = 0;							// неправильный индекс
 		Array<std::string, 2>  arr2{ "sss", "sas", "more"};		// превышение списка инициализации
 	}
 	catch (ArrayException &exception) {	// обрабатываем их с помощью класса-исключения
@@ -133,24 +133,24 @@ void sas3() {
 	try
 	{
 		std::string str;
-		str.resize(-2);													// генерируем исключение
+		str.resize(-2);							// генерируем исключение
 	}
-	catch (std::bad_alloc&) {											// класс bad_alloc дочерний классу exception, применяем catch только для исключения типа bad_alloc
+	catch (std::bad_alloc&) {						// класс bad_alloc дочерний классу exception, применяем catch только для исключения типа bad_alloc
 		std::cerr << "Out of memory!";
 	}
-	catch (std::exception &excep) {										// класс exception, принимает все дочерние типы исключений, сам класс интерфейсный
+	catch (std::exception &excep) {						// класс exception, принимает все дочерние типы исключений, сам класс интерфейсный
 		std::cerr << "Standard exception: " << excep.what() << '\n';	// виртуальный метод what() возвращает строку c-style с описанием ошибки
 	}
 
-	try { throw std::runtime_error("Exemple error name!"); }			// генерируем исключение с собственным именем
+	try { throw std::runtime_error("Exemple error name!"); }		// генерируем исключение с собственным именем
 	catch (std::exception &excep) {
 		std::cerr << "Standard exception: " << excep.what() << '\n';
 	}
 
-	Array <float, 10> flt{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };				// класс-исключение ArrayExaption наследует std::exception
-	try{ flt[-1]; }														// исключение из-за некорректного индекса
+	Array <float, 10> flt{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };			// класс-исключение ArrayExaption наследует std::exception
+	try{ flt[-1]; }								// исключение из-за некорректного индекса
 	catch (std::exception &excep) {
-		std::cerr << "Array exception:\t" << excep.what() << '\n';		// благодаря полиморфизму, мы переопределили родительский метод
+		std::cerr << "Array exception:\t" << excep.what() << '\n';	// благодаря полиморфизму, мы переопределили родительский метод
 	}
 
 }
@@ -168,7 +168,7 @@ void sas4() {
 
 	try
 	{
-		except_funk();					// функция сгенерировала исключение, обработала и выбросила копию/клон см. функцию
+		except_funk();			// функция сгенерировала исключение, обработала и выбросила копию/клон см. функцию
 	}
 	catch (std::exception &except) {
 		std::cout << "Funk Exception:\t" << except.what() << '\n';
@@ -180,9 +180,9 @@ void sas4() {
 	{
 		try
 		{
-			throw Child();	// исключение дочернего типа
+			throw Child();		// исключение дочернего типа
 		}
-		catch (Parent &p) {	// исключение может обработать родитель
+		catch (Parent &p) {		// исключение может обработать родитель
 			std::cout << "Exception type:\t";
 			p.print();
 
@@ -193,7 +193,7 @@ void sas4() {
 	catch (Parent &p) {		
 		std::cout << "Exception type:\t";
 		p.print();			// если копия, то Parent (обрезка объекта)
-							// если клон, то Child (метод виртуальный)
+						// если клон, то Child (метод виртуальный)
 	}
 
 	try 
